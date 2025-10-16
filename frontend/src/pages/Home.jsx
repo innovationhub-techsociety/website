@@ -50,25 +50,25 @@ const FOUNDERS = [
   {
     name: "Akashdeep Das",
     title: "Founder and President",
-    imageUrl: "https://theinnovationhub.vercel.app/assets/akash.jpg",
+    imageUrl: "../assets/akash.jpg",
     socialUrl: "#"
   },
   {
     name: "Nimit Jalan",
     title: "Associate, AI and Content Ambassador",
-    imageUrl: "https://theinnovationhub.vercel.app/assets/nimit.jpg",
+    imageUrl: "../assets/nimit.jpg",
     socialUrl: "#"
   },
   {
     name: "Vedant Jain",
     title: "Our STEM Ambassador",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=VJ",
+    imageUrl: "../assets/vedant.png",
     socialUrl: "#"
   },
   {
     name: "Mahnoor Khan",
     title: "Content and Social Outreach Ambassador",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=MK",
+    imageUrl: "../assets/mahnoor.png",
     socialUrl: "#"
   }
 ];
