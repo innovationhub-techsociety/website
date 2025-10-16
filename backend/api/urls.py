@@ -1,4 +1,6 @@
 from django.urls import path
-from . import views
+from .views import *
 
-urlpatterns = []
+urlpatterns = [
+    path('user/', GetCurrentUserView.as_view(), name='get-current-user'),
+]

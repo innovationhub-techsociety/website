@@ -3,6 +3,16 @@ import { useState, useEffect } from "react";
 import { Sparkles, Zap, Rocket, Users, Award, TrendingUp, Linkedin, Lightbulb, ArrowRight, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+// Assume a function exists to check user's authentication status.
+// In a real application, this would check for a valid token, user session, or state from a context.
+const isUserLoggedIn = () => {
+  // Replace this with your actual authentication logic.
+  // For example, check for a token in localStorage:
+  // return !!localStorage.getItem("authToken");
+  return false; // For demonstration, assuming the user is not logged in.
+};
+
+
 const STATS = {
   foundingYear: "2025",
   spotsAvailable: "200",
@@ -94,6 +104,13 @@ export default function Home() {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.8]);
+
+  useEffect(() => {
+    // If the user is logged in, redirect them to the dashboard page.
+    if (isUserLoggedIn()) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
