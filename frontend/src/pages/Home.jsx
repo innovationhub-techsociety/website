@@ -178,7 +178,7 @@ export default function Home() {
             whileHover={{ scale: 1.05 }}
           >
             <img 
-              src="src\assets\Innovation Hub Logo.png" 
+              src="https://github.com/innovationhub-techsociety/website/blob/main/frontend/src/assets/Innovation%20Hub%20Logo.png" 
               alt="Innovation Hub Logo" 
               className="h-12 w-12"
             />
@@ -651,7 +651,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">
                 <img 
-                  src="src\assets\Innovation Hub Logo.png" 
+                  src="https://github.com/innovationhub-techsociety/website/blob/main/frontend/src/assets/Innovation%20Hub%20Logo.png" 
                   alt="Innovation Hub Logo" 
                   className="inline-block h-8 w-8 mr-2"
                 />
