@@ -50,25 +50,25 @@ const FOUNDERS = [
   {
     name: "Akashdeep Das",
     title: "Founder and President",
-    imageUrl: "public/akash.jpg",
+    imageUrl: "akash.jpg",
     socialUrl: "https://www.linkedin.com/in/akashdeep-das-49b72937b/"
   },
   {
     name: "Nimit Jalan",
     title: "Associate, AI and Content Ambassador",
-    imageUrl: "public/nimit.jpg",
+    imageUrl: "nimit.jpg",
     socialUrl: "https://www.linkedin.com/in/nimit-jalan/"
   },
   {
     name: "Vedant Jain",
     title: "Our STEM Ambassador",
-    imageUrl: "public/vedant.png",
+    imageUrl: "vedant.png",
     socialUrl: "https://www.linkedin.com/in/vedant-jain-05561229a/"
   },
   {
     name: "Mahnoor Khan",
     title: "Content and Social Outreach Ambassador",
-    imageUrl: "public/mahnoor.png",
+    imageUrl: "mahnoor.png",
     socialUrl: "#"
   }
 ];
