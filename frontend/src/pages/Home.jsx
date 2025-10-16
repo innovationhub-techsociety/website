@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Sparkles, Zap, Rocket, Users, Award, TrendingUp, Linkedin, Lightbulb, ArrowRight, Check } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 
 const STATS = {
   foundingYear: "2025",
@@ -48,27 +48,27 @@ const PERKS = [
 
 const FOUNDERS = [
   {
-    name: "Alex Johnson",
-    title: "Lead Visionary & CEO",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=AJ",
+    name: "Akashdeep Das",
+    title: "Founder and President",
+    imageUrl: "https://theinnovationhub.vercel.app/assets/akash.jpg",
     socialUrl: "#"
   },
   {
-    name: "Samantha Carter",
-    title: "Chief Technology Officer",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=SC",
+    name: "Nimit Jalan",
+    title: "Associate, AI and Content Ambassador",
+    imageUrl: "https://theinnovationhub.vercel.app/assets/nimit.jpg",
     socialUrl: "#"
   },
   {
-    name: "Michael Chen",
-    title: "Head of Product",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=MC",
+    name: "Vedant Jain",
+    title: "Our STEM Ambassador",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=VJ",
     socialUrl: "#"
   },
   {
-    name: "Jessica Rodriguez",
-    title: "Community Director",
-    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=JR",
+    name: "Mahnoor Khan",
+    title: "Content and Social Outreach Ambassador",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=MK",
     socialUrl: "#"
   }
 ];
@@ -89,6 +89,7 @@ function Button({ children, className = "", variant = "primary", ...props }) {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -208,10 +209,11 @@ export default function Home() {
             ))}
           </nav>
           
-          <Button variant="primary">
+          <Button variant="primary" onClick={() => navigate("/login")}>
             Sign In
             <ArrowRight className="inline-block ml-2" size={18} />
-          </Button>
+          </Button>          
+
         </div>
       </motion.header>
 

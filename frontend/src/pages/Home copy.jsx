@@ -1,13 +1,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Sparkles, Zap, Rocket, Users, Award, TrendingUp, Globe, Code, Lightbulb, ArrowRight, Check } from "lucide-react";
+import { Sparkles, Zap, Rocket, Users, Award, TrendingUp, Linkedin, Lightbulb, ArrowRight, Check } from "lucide-react";
 
-// Placeholder values - FILL THESE IN
+
 const STATS = {
   foundingYear: "2025",
-  spotsAvailable: "50", // PLACEHOLDER - How many spots in first cohort
-  programDuration: "90 Days",
-  launchDate: "January 2025" // PLACEHOLDER - When applications open
+  spotsAvailable: "200",
+  programDuration: "12 months",
+  launchDate: "19th October 2025"
 };
 
 const PROGRAMS = [
@@ -44,6 +44,33 @@ const PERKS = [
   { icon: Zap, text: "24/7 community support" },
   { icon: TrendingUp, text: "Career placement assistance" },
   { icon: Rocket, text: "Access to funding & grants" }
+];
+
+const FOUNDERS = [
+  {
+    name: "Alex Johnson",
+    title: "Lead Visionary & CEO",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=AJ",
+    socialUrl: "#"
+  },
+  {
+    name: "Samantha Carter",
+    title: "Chief Technology Officer",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=SC",
+    socialUrl: "#"
+  },
+  {
+    name: "Michael Chen",
+    title: "Head of Product",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=MC",
+    socialUrl: "#"
+  },
+  {
+    name: "Jessica Rodriguez",
+    title: "Community Director",
+    imageUrl: "https://placehold.co/400x400/1a1a1a/FFFFFF?text=JR",
+    socialUrl: "#"
+  }
 ];
 
 function Button({ children, className = "", variant = "primary", ...props }) {
@@ -151,7 +178,7 @@ export default function Home() {
             whileHover={{ scale: 1.05 }}
           >
             <img 
-              src="https://github.com/user-attachments/assets/cf182b5d-eb5e-4ae4-a4db-790e8c0a7d5f" 
+              src="https://theinnovationhub.vercel.app/assets/Innovation%20Hub%20Logo-oAnrIoLA.png" 
               alt="Innovation Hub Logo" 
               className="h-12 w-12"
             />
@@ -403,7 +430,7 @@ export default function Home() {
       </section>
 
       {/* PERKS SECTION - Bento Grid */}
-      <section className="relative z-10 py-32 px-10 bg-gradient-to-b from-transparent via-purple-950/20 to-transparent">
+      <section className="relative z-10 py-32 px-10">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -442,7 +469,7 @@ export default function Home() {
       </section>
 
       {/* STATS SECTION - Enhanced */}
-      <section id="success" className="relative z-10 py-32 bg-gradient-to-r from-cyan-900/20 via-blue-900/20 to-cyan-900/20">
+      <section id="success" className="relative z-10 py-32">
         <div className="max-w-7xl mx-auto px-10">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -511,6 +538,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOUNDERS SECTION - NEW */}
+      <section id="founders" className="relative z-10 py-32 px-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-6xl font-black text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
+          >
+              Meet the Team
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {FOUNDERS.map((founder, i) => (
+                  <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      whileHover={{ y: -10, scale: 1.05 }}
+                      className="group relative flex flex-col items-center text-center p-6 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10"
+                  >
+                      <div className="relative mb-4">
+                          <img
+                              src={founder.imageUrl}
+                              alt={founder.name}
+                              className="w-40 h-40 rounded-full object-cover border-4 border-cyan-500/30 group-hover:border-cyan-500 transition-all duration-300"
+                          />
+                          <motion.div
+                              className="absolute inset-0 rounded-full border-2 border-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                          />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-1">{founder.name}</h3>
+                      <p className="text-cyan-400 font-semibold mb-4">{founder.title}</p>
+                      <a href={founder.socialUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                          <Linkedin size={24} />
+                      </a>
+                  </motion.div>
+              ))}
+          </div>
+        </div>
+      </section>
 
 
       {/* CTA SECTION - Mind-Blowing */}
@@ -566,20 +638,20 @@ export default function Home() {
             </div>
 
             <p className="text-sm text-gray-400 mt-8">
-              🚀 Applications open {STATS.launchDate} • Only {STATS.spotsAvailable} spots available
+              Applications open {STATS.launchDate} • Only {STATS.spotsAvailable} spots available
             </p>
           </div>
         </motion.div>
       </section>
 
       {/* FOOTER - Premium */}
-      <footer id="contact" className="relative z-10 py-16 px-10 bg-black/60 border-t border-white/10 backdrop-blur-xl">
+      <footer id="contact" className="relative z-10 py-16 px-10 border-t border-white/10 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">
                 <img 
-                  src="https://github.com/user-attachments/assets/cf182b5d-eb5e-4ae4-a4db-790e8c0a7d5f" 
+                  src="https://theinnovationhub.vercel.app/assets/Innovation%20Hub%20Logo-oAnrIoLA.png" 
                   alt="Innovation Hub Logo" 
                   className="inline-block h-8 w-8 mr-2"
                 />
@@ -588,17 +660,6 @@ export default function Home() {
               <p className="text-gray-400 mb-6 max-w-md">
                 Empowering the next generation of builders, creators, and world-changers. Join us in shaping the future.
               </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-4">Programs</h4>
-              <div className="space-y-2">
-                {["Innovation Sprint", "Builder Track", "Global Impact", "Mentorship"].map((link) => (
-                  <a key={link} href="#" className="block text-gray-400 hover:text-cyan-400 transition-colors">
-                    {link}
-                  </a>
-                ))}
-              </div>
             </div>
 
             <div>
