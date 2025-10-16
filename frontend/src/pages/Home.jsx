@@ -638,7 +638,7 @@ export default function Home() {
             </div>
 
             <p className="text-sm text-gray-400 mt-8">
-              🚀 Applications open {STATS.launchDate} • Only {STATS.spotsAvailable} spots available
+              Applications open {STATS.launchDate} • Only {STATS.spotsAvailable} spots available
             </p>
           </div>
         </motion.div>
