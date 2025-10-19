@@ -3,13 +3,11 @@ import { useState, useEffect } from "react";
 import { Sparkles, Zap, Rocket, Users, Award, TrendingUp, Linkedin, Lightbulb, ArrowRight, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-// Assume a function exists to check user's authentication status.
-// In a real application, this would check for a valid token, user session, or state from a context.
+
 const isUserLoggedIn = () => {
-  // Replace this with your actual authentication logic.
-  // For example, check for a token in localStorage:
-  // return !!localStorage.getItem("authToken");
-  return false; // For demonstration, assuming the user is not logged in.
+  console.log("Checking login status...");
+  console.log("Access Token Exists?: ", !!localStorage.getItem("accessToken") );
+  return !!localStorage.getItem("accessToken");
 };
 
 
@@ -65,7 +63,7 @@ const FOUNDERS = [
   },
   {
     name: "Nimit Jalan",
-    title: "Associate, AI and Content Ambassador",
+    title: "Co-Founder & Tech Ambassador",
     imageUrl: "nimit.jpg",
     socialUrl: "https://www.linkedin.com/in/nimit-jalan/"
   },
@@ -313,8 +311,8 @@ export default function Home() {
           className="flex gap-12 mt-20 flex-wrap justify-center"
         >
           {[
-            { label: "Program Duration", value: STATS.programDuration, icon: Rocket },
-            { label: "Founding Members", value: STATS.spotsAvailable, icon: Users },
+            { label: "Active members", value: "60+", icon: Rocket },
+            { label: "People reached", value: "45000+", icon: Users },
             { label: "Starting", value: STATS.launchDate, icon: Sparkles },
           ].map((stat, i) => (
             <motion.div
