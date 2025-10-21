@@ -32,7 +32,7 @@ const PROGRAMS = [
     title: "Competitions",
     duration: "Quarterly",
     description: "Put your skills to the test in hackathons, pitch competitions, and innovation challenges with real prizes",
-    benefits: ["Cash prizes", "Mentorship awards", "Exposure to investors", "Portfolio projects"],
+    benefits: ["Internship Opportunities", "Mentorship awards", "Exposure to investors", "Portfolio projects"],
     color: "from-blue-600 to-cyan-600"
   },
   {
