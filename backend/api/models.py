@@ -3,7 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
 class User(AbstractUser):
-    linkedin_profile = models.URLField(blank=True, null=True, help_text="Link to the user's LinkedIn profile.")
+    linkedin_profile = models.URLField(blank=True, null=True)
+
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='api_user_set',
@@ -19,7 +20,6 @@ class User(AbstractUser):
         verbose_name='user permissions',
     )
 
-# 1. Generic Competition Model (for Essays & Pitches)
 class Competition(models.Model):
     class CompetitionType(models.TextChoices):
         ESSAY = 'ESSAY', 'Essay Prompt'
@@ -44,23 +44,19 @@ class Competition(models.Model):
     def __str__(self):
         return f"[{self.get_type_display()}] {self.title}"
 
-# 2. Generic Submission Model
 class Submission(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE, related_name='submissions')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='submissions')
-    submission_file = models.FileField(upload_to='submissions/%Y/%m/%d/', help_text="The user's submitted file (e.g., PDF, DOCX, PPTX).")
-    submission_text = models.TextField(blank=True, help_text="Optional notes or text-based submission.")
+    submission_text = models.TextField(blank=True, help_text="Optional text the user provided at submission time.")
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-submitted_at']
-        # A user can only submit to a specific competition once
         unique_together = ('competition', 'user')
 
     def __str__(self):
-        return f"Submission by {self.user.username} for {self.competition.title}"
+        return f"Submission: {self.user.username} -> {self.competition.title} @ {self.submitted_at.isoformat()}"
 
-# 3. Timeline Event Model
 class TimelineEvent(models.Model):
     class EventType(models.TextChoices):
         VIRTUAL = 'VIRTUAL', 'Virtual'
@@ -77,7 +73,6 @@ class TimelineEvent(models.Model):
     def __str__(self):
         return self.title
 
-# 4. Research Opportunity Model
 class ResearchOpportunity(models.Model):
     title = models.CharField(max_length=255)
     field = models.CharField(max_length=100, help_text="e.g., CleanTech, AI")
@@ -92,7 +87,6 @@ class ResearchOpportunity(models.Model):
     def __str__(self):
         return self.title
 
-# 5. Session Recording Model
 class SessionRecording(models.Model):
     title = models.CharField(max_length=255)
     speaker = models.CharField(max_length=100)
@@ -105,3 +99,28 @@ class SessionRecording(models.Model):
 
     def __str__(self):
         return self.title
+
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    content = models.TextField()
+    file = models.FileField(upload_to='posts/', blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Post by {self.user.username} at {self.created_at}"
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Comment by {self.user.username} on Post {self.post.id}"
