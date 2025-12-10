@@ -27,7 +27,7 @@ function Login() {
         if (code && pendingProvider) {
             const handleCallback = async () => {
                 try {
-                    const res = await api.post(`/auth/${pendingProvider}/`, { code })
+                    const res = await api.post(`/api/auth/${pendingProvider}/`, { code })
                     localStorage.setItem("access", res.data.access)
                     localStorage.setItem("refresh", res.data.refresh)
                     localStorage.removeItem("pending_social_provider")

@@ -14,7 +14,7 @@ const useSocialAuth = () => {
             // If we didn't set client_class, it expects 'access_token'.
             // My backend setup included client_class, so I should use code flow.
             console.log("Google response:", tokenResponse);
-            const res = await api.post("/auth/google/", {
+            const res = await api.post("/api/auth/google/", {
                 code: tokenResponse.code,
                 callback_url: window.location.origin
             });
@@ -30,7 +30,7 @@ const useSocialAuth = () => {
 
     const handleSocialLogin = async (provider, code) => {
         try {
-            const res = await api.post(`/auth/${provider}/`, {
+            const res = await api.post(`/api/auth/${provider}/`, {
                 code: code,
                 callback_url: window.location.origin + "/login"
             });
