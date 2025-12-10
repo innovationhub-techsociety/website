@@ -21,6 +21,7 @@ class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
     permission_classes = [AllowAny]
+    authentication_classes = []
     
     @property
     def callback_url(self):
@@ -32,12 +33,14 @@ class GitHubLogin(SocialLoginView):
     client_class = OAuth2Client
     callback_url = "http://localhost:5173/login"
     permission_classes = [AllowAny]
+    authentication_classes = []
 
 class MicrosoftLogin(SocialLoginView):
     adapter_class = MicrosoftGraphOAuth2Adapter
     client_class = OAuth2Client
     callback_url = "http://localhost:5173/login"
     permission_classes = [AllowAny]
+    authentication_classes = []
 
 # Create your views here.
 class CreateUserView(generics.CreateAPIView):
