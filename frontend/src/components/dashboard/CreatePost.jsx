@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { UploadCloud, X, Send } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 import api from "../../api";
 
 export default function CreatePost({ onPostCreated }) {
