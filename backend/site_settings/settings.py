@@ -236,7 +236,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True  # Keep true for dev convenience, but...
+# If credentials are sent, we must specify origin. dynamic origin mirroring is handled by the lib if ALLOW_ALL=True usually.
+# But let's be explicit to be safe.
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 CORS_ALLOWS_CREDENTIALS = True
 
 # Email Configuration (values can be provided via `backend/.env` or environment)

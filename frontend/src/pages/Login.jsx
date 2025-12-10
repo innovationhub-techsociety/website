@@ -34,7 +34,7 @@ function Login() {
                     navigate("/")
                 } catch (error) {
                     console.error("Social login callback failed", error)
-                    const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || "Login Failed";
+                    const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Login Failed";
                     alert(`Social login failed: ${msg}`)
                 }
             }

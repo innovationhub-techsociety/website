@@ -23,7 +23,7 @@ const useSocialAuth = () => {
             window.location.href = "/";
         } catch (error) {
             console.error("Google Login Error:", error);
-            const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || "Google Login Failed";
+            const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Google Login Failed";
             alert(`Google Login Failed: ${msg}`);
         }
     };
@@ -39,7 +39,7 @@ const useSocialAuth = () => {
             window.location.href = "/";
         } catch (error) {
             console.error(`${provider} Login Error:`, error);
-            const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || "Login Failed";
+            const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Login Failed";
             alert(`${provider} Login Failed: ${msg}`);
         }
     };
