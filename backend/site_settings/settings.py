@@ -106,8 +106,19 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         },
         # Microsoft often requires 'tenant' configuration if not multi-tenant specific
+        # Microsoft often requires 'tenant' configuration if not multi-tenant specific
     }
 }
+
+# Allauth / dj-rest-auth settings to fix deprecation warnings
+ACCOUNT_SIGNUP_FIELDS = {
+    "email": {"required": True},
+    "username": {"required": True},
+}
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
