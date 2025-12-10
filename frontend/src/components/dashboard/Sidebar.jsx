@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BarChart2, FileText, Award, Calendar, BrainCircuit, Video } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 
 export default function Sidebar({ activeSection, setActiveSection, navigate }) {
     const navItems = ["Dashboard", "Essay Portal", "Pitch Competitions", "Events", "Research", "Recordings"];

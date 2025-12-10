@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Rocket, Sparkles, Users } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 import { STATS } from "../../constants";
 
 export default function Hero() {

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 
 export default function Header() {
     const navigate = useNavigate();

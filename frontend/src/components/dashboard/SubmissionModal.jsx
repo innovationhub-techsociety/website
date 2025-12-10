@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 import { useState } from "react";
 import api from "../../api";
 

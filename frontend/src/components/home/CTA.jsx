@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 import { STATS } from "../../constants";
 
 export default function CTA() {
