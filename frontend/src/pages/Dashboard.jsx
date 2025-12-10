@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Mic, Video, BrainCircuit, Users, Calendar, Award, FileText, UploadCloud, Check, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
-import Button from "../components/ui/Button";
+import Button from "../components/ui/button";
 import Sidebar from "../components/dashboard/Sidebar";
 import SubmissionModal from "../components/dashboard/SubmissionModal";
 import Feed from "../components/dashboard/Feed";
