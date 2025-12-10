@@ -20,7 +20,11 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
-    callback_url = "postmessage" # or any valid URL if overridden
+    
+    @property
+    def callback_url(self):
+        # Return the callback_url from the request body (e.g. 'postmessage')
+        return self.request.data.get('callback_url', 'postmessage')
     
 class GitHubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
