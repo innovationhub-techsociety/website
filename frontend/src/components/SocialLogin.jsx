@@ -21,7 +21,7 @@ const useSocialAuth = () => {
             });
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
-            window.location.href = "/";
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Google Login Error:", error);
             const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Google Login Failed";
@@ -37,7 +37,7 @@ const useSocialAuth = () => {
             });
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
-            window.location.href = "/";
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error(`${provider} Login Error:`, error);
             const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Login Failed";

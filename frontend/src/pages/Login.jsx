@@ -31,7 +31,7 @@ function Login() {
                     localStorage.setItem("access", res.data.access)
                     localStorage.setItem("refresh", res.data.refresh)
                     localStorage.removeItem("pending_social_provider")
-                    navigate("/")
+                    navigate("/dashboard")
                 } catch (error) {
                     console.error("Social login callback failed", error)
                     const msg = error.response?.data?.non_field_errors?.[0] || error.response?.data?.detail || JSON.stringify(error.response?.data) || error.message || "Login Failed";

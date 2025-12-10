@@ -265,3 +265,5 @@ _raw_recipients = os.environ.get('SUBMISSION_NOTIFICATION_EMAILS', '')
 SUBMISSION_NOTIFICATION_EMAILS = [r.strip() for r in _raw_recipients.split(',') if r.strip()]
 
 AUTH_USER_MODEL = "api.User"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
