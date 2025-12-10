@@ -5,7 +5,7 @@ djangorestframework
 djangorestframework-simplejwt
 gunicorn
 psycopg2
-django-allauth
+django-allauth<0.60.0
 dj-rest-auth[with_social]
 requests
 python-dotenv
