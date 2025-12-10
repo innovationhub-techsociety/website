@@ -242,8 +242,16 @@ CORS_ALLOW_ALL_ORIGINS = True  # Keep true for dev convenience, but...
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://theinnovationhub.vercel.app",
 ]
 CORS_ALLOWS_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://theinnovationhub.vercel.app",
+    "https://innovationhub.onrender.com",
+]
 
 # Email Configuration (values can be provided via `backend/.env` or environment)
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')

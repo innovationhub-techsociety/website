@@ -14,9 +14,10 @@ const useSocialAuth = () => {
             // If we didn't set client_class, it expects 'access_token'.
             // My backend setup included client_class, so I should use code flow.
             console.log("Google response:", tokenResponse);
+            // dj-rest-auth with Google popup flow requires 'postmessage' as redirect_uri (callback_url)
             const res = await api.post("/api/auth/google/", {
                 code: tokenResponse.code,
-                callback_url: window.location.origin
+                callback_url: "postmessage"
             });
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
