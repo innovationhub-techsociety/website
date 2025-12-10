@@ -26,13 +26,13 @@ export default function Partners() {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             whileHover={{ scale: 1.1, filter: "brightness(1.2)" }}
-                            className="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer block"
+                            className="transition-all duration-300 cursor-pointer block"
                         >
                             {/* Partner Logo */}
                             <img
                                 src={partner.logo}
                                 alt={partner.name}
-                                className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                                className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                             />
                         </motion.a>
                     ))}

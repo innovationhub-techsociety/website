@@ -28,7 +28,7 @@ export default function Speakers() {
                             <img
                                 src={uni.logo}
                                 alt={uni.name}
-                                className="h-16 md:h-20 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300 filter brightness-0 invert group-hover:filter-none"
+                                className="h-16 md:h-20 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                             />
                             <p className="mt-4 text-sm text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
                                 {uni.name}
