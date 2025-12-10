@@ -20,14 +20,17 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = "postmessage" # or any valid URL if overridden
     
 class GitHubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = "http://localhost:5173/login"
 
 class MicrosoftLogin(SocialLoginView):
     adapter_class = MicrosoftGraphOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = "http://localhost:5173/login"
 
 # Create your views here.
 class CreateUserView(generics.CreateAPIView):
