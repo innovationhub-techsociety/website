@@ -16,6 +16,7 @@ const useSocialAuth = () => {
             console.log("Google response:", tokenResponse);
             const res = await api.post("/auth/google/", {
                 code: tokenResponse.code,
+                callback_url: window.location.origin
             });
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
@@ -30,6 +31,7 @@ const useSocialAuth = () => {
         try {
             const res = await api.post(`/auth/${provider}/`, {
                 code: code,
+                callback_url: window.location.origin + "/login"
             });
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
