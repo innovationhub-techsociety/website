@@ -10,6 +10,32 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Competition, Submission, TimelineEvent, ResearchOpportunity, SessionRecording
 
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
+from allauth.socialaccount.providers.microsoft.views import MicrosoftGraphOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    client_class = OAuth2Client
+    # This callback_url must match exactly what you send from frontend
+    # For Implicit/Code flow it might vary.
+    # We will assume code flow so the frontend sends 'code'.
+    # If using 'code', OAuth2Client is required.
+    # callback_url = "http://localhost:5173" 
+    
+class GitHubLogin(SocialLoginView):
+    adapter_class = GitHubOAuth2Adapter
+    client_class = OAuth2Client
+    # callback_url = "http://localhost:5173"
+
+class MicrosoftLogin(SocialLoginView):
+    adapter_class = MicrosoftGraphOAuth2Adapter
+    client_class = OAuth2Client
+    # callback_url = "http://localhost:5173"
+
 # Create your views here.
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()

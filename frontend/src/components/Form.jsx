@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, User, Lock } from "lucide-react";
 import Background from "./home/Background";
 
-function Form({ route, method }) {
+function Form({ route, method, children }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -114,6 +114,15 @@ function Form({ route, method }) {
                         </a>
                     </p>
                 </form>
+                {/* Render additional content (Social Login) inside the card but outside the form tag if preferred, or inside. 
+                    If inside form, buttons (SocialLogin) must have type="button" to avoid submitting. 
+                    SocialLogin buttons already have type="button". 
+                    Let's put them inside the motion.div but outside the form for cleaner separation or inside form? 
+                    Inside form allows spacing. Let's put them INSIDE the form block for consistency. 
+                 */}
+                <div className="mt-4 px-8 pb-8">
+                    {children}
+                </div>
             </motion.div>
         </div>
     );

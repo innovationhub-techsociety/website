@@ -13,5 +13,8 @@ urlpatterns = [
     path('events/', TimelineEventListView.as_view(), name='event-list'),
     path('research/', ResearchOpportunityListView.as_view(), name='research-list'),
     path('recordings/', SessionRecordingListView.as_view(), name='recording-list'),
+    path('auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('auth/github/', GitHubLogin.as_view(), name='github_login'),
+    path('auth/microsoft/', MicrosoftLogin.as_view(), name='microsoft_login'),
     path('', include(router.urls)),
 ]
