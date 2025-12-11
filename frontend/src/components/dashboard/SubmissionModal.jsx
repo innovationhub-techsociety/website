@@ -24,11 +24,7 @@ export default function SubmissionModal({ competition, onClose, onSuccess }) {
                 formData.append('submission_file', submissionFile);
             }
 
-            await api.post("/api/submissions/", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            await api.post("/api/submissions/", formData);
 
             alert("Submission successful! You'll receive a confirmation email shortly.");
             onSuccess();
