@@ -85,39 +85,46 @@ class SubmissionCreateView(generics.CreateAPIView):
         Instead, send submission details (and the uploaded file if present) via email
         to the configured notification addresses.
         """
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        user = request.user
-        validated = serializer.validated_data
-        competition = validated.get('competition')
-        submission_text = validated.get('submission_text', '')
-        submission_file = validated.get('submission_file', None)
-
-        # Send notification email (do not persist anything to DB)
         try:
-            services.send_admin_notification(user, competition, submission_text, submission_file)
-        except Exception as e:
-            # Log error but return success response (submission itself shouldn't fail if email fails)
-            print(f"Error sending submission notification email: {e}")
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
-        # Send confirmation email to user
-        try:
-            services.send_user_confirmation(user, competition)
-        except Exception as e:
-            print(f"Error sending user confirmation email: {e}")
+            user = request.user
+            validated = serializer.validated_data
+            competition = validated.get('competition')
+            submission_text = validated.get('submission_text', '')
+            submission_file = validated.get('submission_file', None)
 
-        try:
-            Submission.objects.get_or_create(
-                competition=competition,
-                user=user,
-                defaults={'submission_text': submission_text or ''}
-            )
-        except Exception as e:
-            # Log but do not fail the response
-            print(f"Failed to create submission record: {e}")
+            # Send notification email (do not persist anything to DB)
+            try:
+                services.send_admin_notification(user, competition, submission_text, submission_file)
+            except Exception as e:
+                # Log error but return success response (submission itself shouldn't fail if email fails)
+                print(f"Error sending submission notification email: {e}")
 
-        return Response({"detail": "Submission received, emailed, and receipt recorded."}, status=201)
+            # Send confirmation email to user
+            try:
+                services.send_user_confirmation(user, competition)
+            except Exception as e:
+                print(f"Error sending user confirmation email: {e}")
+
+            try:
+                Submission.objects.get_or_create(
+                    competition=competition,
+                    user=user,
+                    defaults={'submission_text': submission_text or ''}
+                )
+            except Exception as e:
+                # Log but do not fail the response
+                print(f"Failed to create submission record: {e}")
+
+            return Response({"detail": "Submission received, emailed, and receipt recorded."}, status=201)
+        
+        except Exception as e:
+            import traceback
+            error_details = traceback.format_exc()
+            print(f"Critical error in submission create: {e}\\n{error_details}")
+            return Response({"detail": f"Internal Error: {str(e)}"}, status=500)
 
 # Generic List Views for other models
 class TimelineEventListView(generics.ListAPIView):
