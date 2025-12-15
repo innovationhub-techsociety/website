@@ -52,7 +52,10 @@ Please review the submission and take appropriate action.
         except Exception as e:
             print(f"Failed to attach submission file: {e}")
 
-    email.send(fail_silently=False)
+    try:
+        email.send(fail_silently=False)
+    except Exception as e:
+        print(f"Failed to send admin notification email: {e}")
 
 
 def send_user_confirmation(user, competition):
@@ -83,4 +86,7 @@ The Innovation Hub Team
         to=[user.email],
     )
 
-    email.send(fail_silently=False)
+    try:
+        email.send(fail_silently=False)
+    except Exception as e:
+        print(f"Failed to send user confirmation email: {e}")
