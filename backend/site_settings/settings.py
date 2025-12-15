@@ -192,8 +192,7 @@ WSGI_APPLICATION = "site_settings.wsgi.application"
 DATABASES = {
     "default": dj_database_url.config(
         default="postgresql://neondb_owner:npg_RO4v8GwgbEzp@ep-wispy-snow-a170g9ch-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
-        conn_max_age=0,  # Disable persistent connections - Neon's pooler handles this
-        conn_health_checks=True,  # Verify connection is alive before using
+        conn_max_age=600
     )
 }
 

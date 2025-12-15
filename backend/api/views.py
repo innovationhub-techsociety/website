@@ -85,11 +85,6 @@ class SubmissionCreateView(generics.CreateAPIView):
         Instead, send submission details (and the uploaded file if present) via email
         to the configured notification addresses.
         """
-    def create(self, request, *args, **kwargs):
-        """Validate incoming submission data but do NOT save it to the database.
-        Instead, send submission details (and the uploaded file if present) via email
-        to the configured notification addresses.
-        """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
