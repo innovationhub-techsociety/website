@@ -151,6 +151,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware", # Must be before CommonMiddleware
+    "api.middleware.ExceptionLoggingMiddleware", # Catch errors early/late
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -160,6 +161,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+# Increase max request body size to 10MB to avoid RequestDataTooBig errors
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
 
 ROOT_URLCONF = "site_settings.urls"
 
