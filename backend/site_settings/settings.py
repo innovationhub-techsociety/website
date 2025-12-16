@@ -111,13 +111,11 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Allauth / dj-rest-auth settings to fix deprecation warnings
-ACCOUNT_SIGNUP_FIELDS = {
-    "email": {"required": True},
-    "username": {"required": True},
-}
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_SIGNUP_FIELDS = [
+    "email*",
+    "username*",
+]
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 
 SIMPLE_JWT = {
@@ -264,6 +262,7 @@ EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = str(os.environ.get('EMAIL_USE_TLS', 'True')).lower() in ('1', 'true', 'yes')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_TIMEOUT = 15  # Timeout in seconds for blocking operations
 
 _raw_recipients = os.environ.get('SUBMISSION_NOTIFICATION_EMAILS', '')
 SUBMISSION_NOTIFICATION_EMAILS = [r.strip() for r in _raw_recipients.split(',') if r.strip()]

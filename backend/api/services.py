@@ -22,9 +22,25 @@ def _debug_email_config():
     return config
 
 
+
+import threading
+
+def _send_email_thread(email_message, context_name="Unknown"):
+    """
+    Internal function to send an email in a separate thread.
+    """
+    try:
+        print(f"[DEBUG] Sending email for {context_name} in background thread...", file=sys.stderr)
+        email_message.send(fail_silently=True)
+        print(f"[DEBUG] Email for {context_name} sent successfully.", file=sys.stderr)
+    except Exception as e:
+        print(f"[DEBUG] Failed to send email for {context_name} in background thread: {e}", file=sys.stderr)
+
+
 def send_admin_notification(user, competition, submission_text, submission_file):
     """
     Send email notification about a new submission to designated admin addresses.
+    Runs in a background thread to prevent blocking the response.
     """
     print(f"[DEBUG] send_admin_notification called for user={user.username}, competition={competition.title}", file=sys.stderr)
     
@@ -45,7 +61,7 @@ def send_admin_notification(user, competition, submission_text, submission_file)
         print("[DEBUG] No SUBMISSION_NOTIFICATION_EMAILS configured. Skipping email send.", file=sys.stderr)
         return
     
-    print(f"[DEBUG] Will send to recipients: {recipient_list}", file=sys.stderr)
+    print(f"[DEBUG] Preparing to send to recipients: {recipient_list}", file=sys.stderr)
 
     subject = f"New Submission: {competition.title} by {user.get_full_name() or user.username}"
 
@@ -79,6 +95,8 @@ Please review the submission and take appropriate action.
         )
 
         # Attach uploaded file (if any)
+        # Note: We must read the file content here in the main thread because 
+        # the file object might be closed or garbage collected in the thread.
         if submission_file:
             try:
                 print(f"[DEBUG] Attaching file: {getattr(submission_file, 'name', 'unknown')}", file=sys.stderr)
@@ -91,13 +109,13 @@ Please review the submission and take appropriate action.
             except Exception as e:
                 print(f"[DEBUG] Failed to attach submission file: {e}", file=sys.stderr)
 
-        print(f"[DEBUG] Attempting to send email...", file=sys.stderr)
-        # Use fail_silently=True to prevent crashes
-        email.send(fail_silently=True)
-        print(f"[DEBUG] email.send() completed", file=sys.stderr)
+        print(f"[DEBUG] Starting background thread for admin notification...", file=sys.stderr)
+        thread = threading.Thread(target=_send_email_thread, args=(email, "Admin Notification"))
+        thread.start()
+        print(f"[DEBUG] Background thread started.", file=sys.stderr)
         
     except Exception as e:
-        print(f"[DEBUG] Exception in send_admin_notification: {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"[DEBUG] Exception in send_admin_notification setup: {type(e).__name__}: {e}", file=sys.stderr)
         import traceback
         traceback.print_exc(file=sys.stderr)
 
@@ -105,6 +123,7 @@ Please review the submission and take appropriate action.
 def send_user_confirmation(user, competition):
     """
     Send a confirmation email to the user who submitted.
+    Runs in a background thread.
     """
     print(f"[DEBUG] send_user_confirmation called for user={user.username}", file=sys.stderr)
     
@@ -139,12 +158,12 @@ The Innovation Hub Team
             to=[user.email],
         )
 
-        print(f"[DEBUG] Sending user confirmation email...", file=sys.stderr)
-        # Use fail_silently=True to prevent crashes
-        email.send(fail_silently=True)
-        print(f"[DEBUG] User confirmation email.send() completed", file=sys.stderr)
+        print(f"[DEBUG] Starting background thread for user confirmation...", file=sys.stderr)
+        thread = threading.Thread(target=_send_email_thread, args=(email, f"User Confirmation ({user.email})"))
+        thread.start()
+        print(f"[DEBUG] Background thread started.", file=sys.stderr)
         
     except Exception as e:
-        print(f"[DEBUG] Exception in send_user_confirmation: {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"[DEBUG] Exception in send_user_confirmation setup: {type(e).__name__}: {e}", file=sys.stderr)
         import traceback
         traceback.print_exc(file=sys.stderr)
